@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
-import TextField from '@mui/material/TextField'
+import Form from './Components/Form';
+import Display from './Components/Display';
 import './App.css';
 
 function App() {
@@ -25,7 +23,7 @@ function App() {
     setFormData({...formData, [event.target.name]: event.target.value})
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = (event, formData) => {
     event.preventDefault()
     setDisplay(formData)
     console.log('this is display in the handleSubmit', display)
@@ -37,6 +35,8 @@ function App() {
 
   return (
     <div className="App">
+      <Display display={display} />
+      <Form handleSubmit={handleSubmit} />
     </div>
   );
 }

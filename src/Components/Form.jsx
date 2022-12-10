@@ -2,8 +2,21 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
+import { useState } from 'react'
 
-const Form = ({ handleChange, handleSubmit, formData }) => {
+const Form = ({ handleSubmit }) => {
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    location: '',
+  })
+  
+  const handleChange = event => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
+  }
+  
   return ( 
     <Box
       display='flex'
@@ -14,7 +27,7 @@ const Form = ({ handleChange, handleSubmit, formData }) => {
       <Paper
         sx={{ width: '100%' }}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(event) => handleSubmit(event, formData)}>
           <TextField
             type='text'
             name='firstName'
